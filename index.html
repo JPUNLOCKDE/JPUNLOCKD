@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNLOCKD | Desbloqueio Premium de Celulares</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --black: #000000;
+            --dark: #121212;
+            --gold: #FFD700;
+            --gold-light: #FFECB3;
+            --gold-dark: #C9A227;
+            --white: #FFFFFF;
+            --gray: #1E1E1E;
+            --shadow-sm: 0 2px 10px rgba(0,0,0,0.3);
+            --shadow-md: 0 5px 20px rgba(0,0,0,0.4);
+            --shadow-lg: 0 15px 40px rgba(0,0,0,0.5);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--white);
+            background-color: var(--black);
+            overflow-x: hidden;
+        }
+
+        /* Tipografia */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            color: var(--white);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Layout */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--gold);
+            color: var(--black);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--gold-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            color: var(--white);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--gold);
+            color: var(--black);
+        }
+
+        /* Botão WhatsApp */
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--gold);
+            color: var(--black);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: var(--transition);
+        }
+
+        .whatsapp-btn:hover {
+            background-color: var(--gold-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+            color: var(--white);
+        }
+
+        .whatsapp-btn i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Header */
+        .header {
+            background-color: rgba(0, 0, 0, 0.9);
+            box-shadow: var(--shadow-sm);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            border-bottom: 1px solid var(--gold);
+        }
+
+        .header.scrolled {
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 10px 0;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .logo span {
+            color: var(--white);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            color: var(--white);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--gold);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                        url('img/fundo\ final.jpg') no-repeat center center/cover;
+            color: var(--white);
+            padding: 180px 0 100px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            animation: fadeInUp 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .hero-btns .btn {
+            min-width: 180px;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: var(--dark);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--gold);
+            margin: 15px auto 0;
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--gray);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid var(--gold);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+            border-color: var(--gold-light);
+        }
+
+        .service-img-container {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .service-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            filter: grayscale(30%);
+        }
+
+        .service-card:hover .service-img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .service-content {
+            padding: 30px;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin: 15px 0;
+            padding: 0;
+        }
+
+        .service-features li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--white);
+        }
+
+        .service-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), 
+                        url('img/fundo\ inicio.jpg') no-repeat center center/cover;
+            color: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--gold);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 50px 0 20px;
+            border-top: 1px solid var(--gold);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            opacity: 0.8;
+            transition: var(--transition);
+            color: var(--white);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 215, 0, 0.1);
+            transition: var(--transition);
+            color: var(--gold);
+        }
+
+        .social-links a:hover {
+            background-color: var(--gold);
+            transform: translateY(-3px);
+            color: var(--black);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes goldPulse {
+            0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+            100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--black);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: var(--transition);
+                border-top: 1px solid var(--gold);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-btns .btn {
+                width: 100%;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            section {
+                padding: 60px 0;
+            }
+
+            .hero {
+                padding: 150px 0 80px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="preloader">
+        <div class="loader-lock"></div>
+        <div class="loader-progress"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="#" class="logo">JP UNLOCK<span>D</span></a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="#services">Serviços</a>
+                <a href="#about">Sobre Nós</a>
+              
+            </nav>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Soluções Premium em Desbloqueio</h1>
+            <p>Liberte seu dispositivo com nossos serviços exclusivos e garantia de qualidade</p>
+            <div class="hero-btns">
+                <a href="#services" class="btn btn-primary">Nossos Serviços</a>
+                <a href="#about" class="btn btn-outline">Sobre Nós</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Serviços Exclusivos</h2>
+                <p>Técnicas avançadas para cada tipo de bloqueio</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- iPhone -->
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="img/iphone.jpg" 
+                             alt="iPhone bloqueado" class="service-img">
+                    </div>
+                    <div class="service-content">
+                        <h3>Desbloqueio iPhone</h3>
+                        <p>Remoção de iCloud, operadora e ativação com garantia total para todos os modelos.</p>
+                        <ul class="service-features">
+                            <li>iCloud Lock Removal</li>
+                            <li>Liberação de operadora</li>
+                            <li>Ativação permanente</li>
+                        </ul>
+                        <a href="https://wa.me/5562981102702?text=Olá!%20Gostaria%20de%20informações%20sobre%20Desbloqueio%20de%20iPhone" class="whatsapp-btn">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- PayJoy -->
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="img/PayJoy_logo_Logo.jpg"
+                             alt="Bloqueio PayJoy" class="service-img">
+                    </div>
+                    <div class="service-content">
+                        <h3>Desbloqueio PayJoy</h3>
+                        <p>Liberação definitiva de celulares com bloqueio por financiamento.</p>
+                        <ul class="service-features">
+                            <li>Android bloqueados</li>
+                            <li>Sem risco de rebloqueio</li>
+                            <li>Processo rápido</li>
+                        </ul>
+                        <a href="https://wa.me/5562981102702?text=Olá!%20Gostaria%20de%20informações%20sobre%20Desbloqueio%20PayJoy" class="whatsapp-btn">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- MDM -->
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="img/mdm.jpg" 
+                             alt="Dispositivo com MDM" class="service-img">
+                    </div>
+                    <div class="service-content">
+                        <h3>Desbloqueio MDM</h3>
+                        <p>Remoção de gestão corporativa (Mobile Device Management).</p>
+                        <ul class="service-features">
+                            <li>iPhones e Androids</li>
+                            <li>Empresarial/Educacional</li>
+                            <li>Garantia total</li>
+                        </ul>
+                        <a href="https://wa.me/5562981102702?text=Olá!%20Gostaria%20de%20informações%20sobre%20Desbloqueio%20MDM" class="whatsapp-btn">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Operadora -->
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="img/operadoras.jpg" 
+                             alt="Chips de operadoras" class="service-img">
+                    </div>
+                    <div class="service-content">
+                        <h3>Desbloqueio de Operadora</h3>
+                        <p>Liberação permanente para uso com qualquer chip.</p>
+                        <ul class="service-features">
+                            <li>Todas operadoras</li>
+                            <li>Android e iPhone</li>
+                            <li>Código oficial</li>
+                        </ul>
+                        <a href="https://wa.me/5562981102702?text=Olá!%20Gostaria%20de%20informações%20sobre%20Desbloqueio%20de%20Operadora" class="whatsapp-btn">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- FRP -->
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="img/google.jpg" 
+                             alt="Bloqueio FRP" class="service-img">
+                    </div>
+                    <div class="service-content">
+                        <h3>Remoção FRP</h3>
+                        <p>Bypass da conta Google após reset de fábrica.</p>
+                        <ul class="service-features">
+                            <li>Todos modelos Android</li>
+                            <li>Solução em minutos</li>
+                            <li>100% remoto</li>
+                        </ul>
+                        <a href="https://wa.me/5562981102702?text=Olá!%20Gostaria%20de%20informações%20sobre%20Remoção%20FRP" class="whatsapp-btn">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Conta MI -->
+                <div class="service-card">
+                    <div class="service-img-container">
+                        <img src="img/mi.jpg" 
+                             alt="Conta MI bloqueada" class="service-img">
+                    </div>
+                    <div class="service-content">
+                        <h3>Desbloqueio Conta MI</h3>
+                        <p>Remoção de conta Xiaomi após reset (MI Account).</p>
+                        <ul class="service-features">
+                            <li>Xiaomi/Redmi/Poco</li>
+                            <li>Sem hardware</li>
+                            <li>Solução definitiva</li>
+                        </ul>
+                        <a href="https://wa.me/5562981102702?text=Olá!%20Gostaria%20de%20informações%20sobre%20Desbloqueio%20Conta%20MI" class="whatsapp-btn">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Sobre a JP UNLOCKD</h2>
+                    <p>Somos especialistas em desbloqueio de dispositivos móveis. Nossa equipe técnica é certificada e utiliza as mais avançadas ferramentas do setor.</p>
+                    <p>Já ajudamos muitos clientes a recuperarem o acesso completo aos seus dispositivos, sempre com transparência e garantia de serviço.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" style="color: var(--gold)">Muitos+</span>
+                            <span class="stat-label">Clientes Satisfeitos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" style="color: var(--gold)">98%</span>
+                            <span class="stat-label">Taxa de Sucesso</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" style="color: var(--gold)">24h</span>
+                            <span class="stat-label">Tempo Médio</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="img/jp desbloqueio menor.jpg" alt="Técnico trabalhando" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>JP UNLOCKD</h3>
+                    <p>Soluções profissionais em desbloqueio de dispositivos móveis com qualidade e garantia.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Serviços</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Desbloqueio iPhone</a></li>
+                        <li><a href="#services">Desbloqueio PayJoy</a></li>
+                        <li><a href="#services">Desbloqueio MDM</a></li>
+                        <li><a href="#services">Desbloqueio Conta MI</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Serviços</a></li>
+                        <li><a href="#about">Sobre Nós</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 UNLOCKD. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Menu Mobile
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Scroll suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Pré-loader
+        window.addEventListener('load', () => {
+            const preloader = document.querySelector('.preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // WhatsApp Redirect para mobile
+        document.querySelectorAll('.whatsapp-btn').forEach(btn => {
+            // Detecta se é mobile para abrir diretamente o app
+            if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const phone = this.href.match(/wa\.me\/(\d+)/)[1];
+                    window.location.href = `whatsapp://send/?phone=${phone}`;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
